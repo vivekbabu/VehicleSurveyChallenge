@@ -1,0 +1,39 @@
+			Instructions for using this application
+		-----------------------------------------------
+
+This project is configured as a maven project. 
+
+Maven allows easy packaging and running of the projects.
+(All the maven commands has to be run from the project's root directory. 
+ie the directory containing project's pom.xml)
+
+To package and install this project use the command
+	mvn clean install
+
+This would download the necessary jar dependencies, compile the project,
+run the project test cases and if everything is successful generate the 
+jar for the project.
+
+Once its successful it would create the jar in the target folder with the name as VehicleSurvey-1.0-SNAPSHOT.jar
+
+To run the application use
+
+	java -jar target\VehicleSurvey-1.0-SNAPSHOT.jar <path-of-input-file>
+
+	eg: java -jar target\VehicleSurvey-1.0-SNAPSHOT.jar E:\\VehicleChallenge.txt
+	
+This project has test cases configured. To view the coverage of the test cases type
+
+	mvn cobertura:cobertura
+
+This runs the tests and generates a code coverage site. To view the code coverage
+go to 'target\site\cobertura' folder.
+
+	Inside it click on the index.html
+	
+If you want to import the project into eclipse run this command 
+	mvn eclipse:eclipse
+
+And then import this project like any other eclipse projects
+	
+					--- Happy Reporting ----

@@ -1,0 +1,65 @@
+Reason to choose this challenge
+----------------------------------------------------------
+
+This is the age of BigData. The biggest challenge that enterprises face today is to take on the 3 v's of big data namely
+	a. Volume
+	b. Variety
+	c. Velocity
+
+The enterprises now have a large volume of data which are can be categorized as 
+Structured data      - Ex. Data in databases
+Semi-structured data - Ex. logs 
+Unstructured data    - Ex. social media posts, photos, videos etc
+
+They also face the problem of velocity. That means there is always a huge amount of data flowing in at real time. 
+
+So one of the critical areas that enterprises are investing in is the technology which enables them to mine high volume, 
+varied structured and high velocity data and come up with business insights that will enable them to align their businesses 
+to the market variations.
+
+Frameworks like hadoop, akka and distributed file systems like HDFS are hence the buzz words in todays's tech world. 
+
+The reason i selected this challenge is because this problem is a small version of the data analysis that we talked about. This problem involves 
+parsing high volume data and designing an object oriented entity model which enables us to generate and store the insights,
+(as of now its held in memory and the reports are printed in console but the application is designed such that it can be easily
+persisted to any datastore). 
+
+How the application has been designed
+----------------------------------------------------------
+
+The VehicleDataAnalyzer is the class which does the orchestration. It checks whether a filename 
+is passed to it, and whether the passed filename exists and if no, shows proper error messages.
+
+If the necessary input is present it uses the VehicleDataReader to read the 
+contents of that file and convert it into a list of VehicleData objects. Each
+VehicleData represents a vehicle crossing in any of the lanes. If its lane A then
+we will have AA hose crosses inside the VehicleData and if its lane B it will have
+ABAB hose crosses. Each hose cross will have the timestamp at which the cross 
+happened. This entire list of VehicleData objects is held in MemoryPersistentVehiclesData object.
+This object has the necessary methods which will provide us the proper data that 
+has to be displayed in the reports.
+
+Now that the MemoryPersistentVehiclesData is returned by the VehicleDataReader,
+the VehicleDataAnalyzer will go ahead and pass this object to each of the 
+configured report generators. Each report generator has the generateAndDisplayReport()
+method which will generate the report and print it to the console.
+More reports can be added when needed. The code is written such that adding
+a new report is very easy. You just need to override the abstract report generator
+and give the necessary time period. The report generator is very generic
+
+The reports that are currently added are
+1. Total vehicle counts in each lane - 
+	a. Morning versus evening, 
+	b. Per hour
+	c. Per half hour
+	d. Per 20 minutes
+	e. Per 15 minutes.
+
+2. Average hourly vehicle count across all days in each lane
+3. Peak volume period of all the days in each lane
+	a. Hourly
+	b. Half day
+4. Hourly speed distribution (Rough) of the traffic in each lane
+5. Rough distance between cars in each lane
+	a. Hourly
+	b. Half Hourly
